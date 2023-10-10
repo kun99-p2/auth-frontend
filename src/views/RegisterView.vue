@@ -1,20 +1,12 @@
 <template>
   <div class="id">
     <h1>Registration</h1>
-    <form>
-      <label for="fname">Username:</label><br>
-      <input type="text" id="uname" name="uname"><br>
-      <label for="lname">Password:</label><br>
-      <input type="password" id="passw" name="passw"><br><br>
-    </form>
+    <input v-model="username" placeholder="Username">
+    <input v-model="password" placeholder="Password" type="password">
   </div>
   <div class="submit">
-    <button @click="cancel" style="margin-right: 10px;">
-    Cancel
-    </button>
-    <button @click="register">
-      Register
-    </button>
+    <button @click="cancel" style="margin-right: 10px;">Cancel</button>
+    <button @click="register">Register</button>
   </div>
 </template>
   
@@ -24,7 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 25vh;
+  height: 20vh;
 }
 .submit {
   font-size: 20px;
@@ -36,10 +28,27 @@
 </style>
 
 <script>
+import axios from 'axios';
 export default {
+  data() {
+    return {
+      username: '',
+      password: ''
+    };
+  },
   methods: {
     register() {
-      this.$router.push('/success');
+      axios.post('http://localhost:5000/register', {
+        username: this.username,
+        password: this.password
+      })
+      .then(response => {
+        console.log(response.data);
+        this.$router.push('/success');
+      })
+      .catch(error => {
+        console.error(error);
+      });
     },
     cancel() {
       this.$router.push('/');
