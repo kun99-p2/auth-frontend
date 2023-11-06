@@ -1,12 +1,12 @@
 <template>
   <div class="id">
-    <h1>Registration</h1>
+    <h1 class="text-white">Registration</h1>
     <input v-model="username" placeholder="Username">
     <input v-model="password" placeholder="Password" type="password">
   </div>
   <div class="submit">
-    <button @click="cancel" style="margin-right: 10px;">Cancel</button>
-    <button @click="register">Register</button>
+    <button class="bg-white" @click="cancel" style="margin-right: 10px;">Cancel</button>
+    <button class="bg-white" @click="register">Register</button>
   </div>
 </template>
   
